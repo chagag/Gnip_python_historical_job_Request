@@ -2,10 +2,10 @@
 
 #### These files were designed for clean and organized downloading of gnip historical track file.
 
-###These files were designed to python 3.5 (unlike the files publised in the gnip website)
+###These files were designed for python 3.5 (unlike the files published in the gnip website - see https://github.com/gnip/support/tree/master/Historical%20PowerTrack/Python)
 
 Two files are included:
 
 1. Job request - set the request and estimate time
 
-2. Jon monitoring - download the files you requested. 
+2. Jon monitoring - download the files you requested.
