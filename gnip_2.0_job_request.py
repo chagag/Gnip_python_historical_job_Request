@@ -34,9 +34,9 @@ def request_url(url, jobString, base64string):
 
 if __name__ == "__main__":
 
-    UN = 'chagag@gmail.com' # change to my email and my password
-    PWD = 'fabrizy8'
-    account = 'StanfordResearch'
+    UN = 'exmple@email.com' # change to my email and my password
+    PWD = 'password'
+    account = 'account name'
     base64string = base64.encodebytes(('%s:%s' % (UN, PWD)).encode()).decode().replace('\n', '')
 
     # create job

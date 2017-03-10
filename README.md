@@ -5,5 +5,7 @@
 ###These files were designed to python 3.5 (unlike the files publised in the gnip website)
 
 Two files are included:
+
 1. Job request - set the request and estimate time
+
 2. Jon monitoring - download the files you requested. 

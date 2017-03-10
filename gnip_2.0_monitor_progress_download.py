@@ -39,12 +39,12 @@ def request_url(url, jobString, base64string):
 
 if __name__ == "__main__":
 
-        UN = 'chagag@gmail.com'
-        PWD = 'fabrizy8'
-        account = 'StanfordResearch'
+        UN = 'example@email.com'
+        PWD = 'password'
+        account = 'accountname'
         base64string = base64.encodebytes(('%s:%s' % (UN, PWD)).encode()).decode().replace('\n', '')
 
-        jobTitle = "test-job-python_amit5" # you have to specify the actual job title to reference to what was previously found.
+        jobTitle = "your_previous_job_title" # you have to specify the actual job title to reference to what was previously found.
 
         #url_file_name = jobTitle + '_json_job_url.txt'
         url_file_name = jobTitle + '.txt'
