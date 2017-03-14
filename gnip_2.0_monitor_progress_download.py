@@ -85,7 +85,7 @@ if __name__ == "__main__":
                 file_name = name_temp2[-5]+name_temp2[-4]+name_temp2[-3]+name_temp2[-2]+name_temp2[-1]
                 outfile_name = data_dir + file_name
                 #old - outfile_name = data_dir + name_temp2[-1] # this is to get the name of the file. We are cutting it until the last /
-                outfile = urllib.URLopener()
+                outfile = urllib.request.URLopener()
                 outfile.retrieve(url_i, outfile_name) # these two lines are made to rertrive the lines from the linst and save it .
                 #unzip the files
 
