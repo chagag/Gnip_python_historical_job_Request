@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # -*- coding: utf-8 -*-
 """
 # date: Wed Sep 16 10:37:34 2015
@@ -16,7 +15,7 @@
 """
 
 from __future__ import division
-import urllib
+import urllib.request
 #import urllib2
 import base64
 import json
@@ -25,26 +24,26 @@ import gzip
 #from __future__ import division
 
 def request_url(url, jobString, base64string):
-      req = urllib2.Request(url=url, data=jobString)
-      req.add_header('Content-type', 'application/json')
-      req.add_header("Authorization", "Basic %s" % base64string)
+    req = urllib.request.Request(url=url, data=jobString)
+    req.add_header('Content-type', 'application/json')
+    req.add_header("Authorization", "Basic %s" % base64string)
 
-      try:
-          response = urllib.request.urlopen(req)
-          the_page = response.read()
-          return the_page
-      except urllib.error.HTTPError as e:
-          print (e.read())
+    try:
+        response = urllib.request.urlopen(req)
+        the_page = response.read()
+        return the_page
+    except urllib.error.HTTPError as e:
+        print (e.read())
 
 
 if __name__ == "__main__":
 
         UN = 'example@email.com'
-        PWD = 'password'
-        account = 'accountname'
+        PWD = 'pass'
+        account = 'AccountName'
         base64string = base64.encodebytes(('%s:%s' % (UN, PWD)).encode()).decode().replace('\n', '')
 
-        jobTitle = "your_previous_job_title" # you have to specify the actual job title to reference to what was previously found.
+        jobTitle = "name_of_project" # you have to specify the actual job title to reference to what was previously found.
 
         #url_file_name = jobTitle + '_json_job_url.txt'
         url_file_name = jobTitle + '.txt'
@@ -56,7 +55,9 @@ if __name__ == "__main__":
         print ('Updating job retrieving status')
         job_page = request_url(job_url, None, base64string)
         parse_job_page = json.loads(job_page)
+        print (parse_job_page)
         job_status = parse_job_page['status']
+        print(job_status)
 
         # check for completion
         if parse_job_page['percentComplete'] ==100:
@@ -65,8 +66,10 @@ if __name__ == "__main__":
 
             # create directory for the current job for file downloading
             data_dir = jobTitle + '/'       #???? backslash?
+            print(data_dir)
             if not os.path.exists(data_dir):
                 os.makedirs(data_dir)
+            print(data_dir)
 
             data_url = parse_job_page['results']['dataURL']
             data_page = request_url(data_url,None, base64string)
@@ -94,5 +97,5 @@ if __name__ == "__main__":
             estimated_duration = float(parse_job_page['quote']['estimatedDurationHours'])
             estimated_remaining_time = estimated_duration-estimated_duration*parse_job_page['percentComplete']/100
 
-            print (completion_progress + '%  completed'  + '\n' + 'Please try again later for downloading...')
+            print (completion_progress + '%  completed'  + '\n' "Please try again later for downloading..." )
             print ('estimated time remaining: ' + str(estimated_remaining_time) + ' (hr)' + '\n')

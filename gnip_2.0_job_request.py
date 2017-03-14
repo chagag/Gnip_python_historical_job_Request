@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # -*- coding: utf-8 -*-
 """
 # date: Wed Sep 19 10:37:34 2015
@@ -34,9 +33,9 @@ def request_url(url, jobString, base64string):
 
 if __name__ == "__main__":
 
-    UN = 'exmple@email.com' # change to my email and my password
-    PWD = 'password'
-    account = 'account name'
+    UN = 'example@email.com' # change to my email and my password
+    PWD = 'pass'
+    account = 'AccountName'
     base64string = base64.encodebytes(('%s:%s' % (UN, PWD)).encode()).decode().replace('\n', '')
 
     # create job
@@ -46,8 +45,8 @@ if __name__ == "__main__":
     dataFormat = "activity_streams" #raceriotsUSA
     fromDate = "201408112359" # This time is inclusive -- meaning the minute specified will be included in the data returned
     toDate =   "201408122359" # This time is exclusive -- meaning the data returned will not contain the minute specified, but will contain the minute immediately preceding it
-    jobTitle = "test-job-python_amit5"
-    rules = [{"value":"Amit Goldenberg"}]
+    jobTitle = "name_of_job"
+    rules = [{"value":"value"}]
     job = {"publisher":publisher,"streamType":streamType,"dataFormat":dataFormat,"fromDate":fromDate,"toDate":toDate,"title":jobTitle,"rules":rules}
     jobString = json.dumps(job).encode()
     print (jobString)
@@ -77,8 +76,7 @@ if __name__ == "__main__":
     print ('    estimated file size:' + parse_status_page['quote']['estimatedFileSizeMb'] + ' Mb')
     print ('\n')
 
-    # check for accepting job
-    # check for quoted size
+    # accept the request
     quoted_hours = float(parse_status_page['quote']['estimatedDurationHours'])
     quoted_size = float(parse_status_page['quote']['estimatedFileSizeMb'])
     if quoted_hours > 15*24:   # the file will expire after 15 days
@@ -89,8 +87,21 @@ if __name__ == "__main__":
     print ('job ' + choice + 'ed' + '\n')
 
     payload = '{"status":"' + choice + '"}'
-
+    payload = payload.encode()
     job_url2 = parse_status_page['jobURL']
+    req_result = urllib.request.Request(url=job_url2, data=payload)
+    req_result.add_header('Content-type', 'application/json')
+    req_result.add_header("Authorization", "Basic %s" % base64string)
+    req_result.get_method = lambda: 'PUT'
+
+    try:
+        response_req_result = urllib.request.urlopen(req_result)
+    except urllib.error.HTTPError as e:
+        print (e.read())
+
+    the_req_result_page = response_req_result.read()
+    parse_req_result_page = json.loads(the_req_result_page)
+    print (parse_req_result_page)
 
     #output to text file:
     file_name = jobTitle + '.txt'
