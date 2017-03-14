@@ -6,6 +6,6 @@
 
 Two files are included:
 
-1. Job request - set the request and estimate time
+1. Job request - set the request and estimate time, accept the job. The output of this code is a txt file with the request address. 
 
 2. Jon monitoring - download the files you requested.
